@@ -25,6 +25,8 @@ type Options struct {
 	// sent and received.  It's primarily intended for debugging and
 	// development.
 	Logger *log.Logger
+
+  HandshakeReadyFn HandshakeReadyFunc
 }
 
 // NewComponent creates a new component from the given options

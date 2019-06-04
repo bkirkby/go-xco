@@ -32,6 +32,8 @@ type Component struct {
 
 	sharedSecret string
 	name         string
+
+  handshakeReadyFn HandshakeReadyFunc
 }
 
 func (c *Component) init(o Options) error {
@@ -58,6 +60,8 @@ func (c *Component) init(o Options) error {
 		c.enc = xml.NewEncoder(newWriteLogger(c.log, conn))
 	}
 	c.stateFn = c.handshakeState
+
+  c.handshakeReadyFn = o.HandshakeReadyFn
 
 	return nil
 }

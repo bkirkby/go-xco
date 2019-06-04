@@ -10,6 +10,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+type HandshakeReadyFunc func()
+
 func sendStreamStart(w io.Writer, name string) (err error) {
 	_, err = fmt.Fprintf(w, `<stream:stream xmlns='jabber:component:accept' xmlns:stream='http://etherx.jabber.org/streams' to='%s'>`, name)
 	err = errors.Wrapf(err, "failed to write stream start for %s", name)
@@ -85,6 +87,11 @@ func (c *Component) handshakeState() (st stateFn, err error) {
 		}
 
 		st = c.readLoopState
+
+    if c.handshakeReadyFn != nil {
+      c.handshakeReadyFn()
+    }
+
 		return
 	}
 }
