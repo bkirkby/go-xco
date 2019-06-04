@@ -39,6 +39,9 @@ type Presence struct {
 	Nick string `xml:"http://jabber.org/protocol/nick nick,omitempty"`
 
 	XMLName string `xml:"presence"`
+
+  // XEP-0045 Multi-user channel
+  X string `xml:"http://jabber.org/protocol/muc x,omitempty"`
 }
 
 // PresenceHandler handles incoming presence requests
